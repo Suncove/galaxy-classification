@@ -2,11 +2,20 @@
 
 #Copyright 2019 Kyle Steckler
 
-#Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this
+# software and associated documentation files (the "Software"), to deal in the Software 
+# without restriction, including without limitation the rights to use, copy, modify, merge, 
+# publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons 
+# to whom the Software is furnished to do so, subject to the following conditions:
 
-#The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+# The above copyright notice and this permission notice shall be included in all copies or 
+# substantial portions of the Software.
 
-#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
+# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR 
+# PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE 
+# FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, 
+# ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import SciServer
 from SciServer import Authentication, SkyServer, CasJobs, SkyQuery
@@ -17,7 +26,7 @@ from getpass import getpass
 import pdb
 import sys
 
-def create_datafiles(n_galaxies = 100,galaxy_type = 'both', lower_z_limit=0.1, upper_z_limit = 0.3, lower_flux_limit = 50, upper_flux_limit = 500, data_release = 'DR15', image_data = True, image_scale_factor = 0.01, to_file=True):
+def create_datafiles(n_galaxies = 150,galaxy_type = 'both', lower_z_limit=0.1, upper_z_limit = 0.3, lower_flux_limit = 50, upper_flux_limit = 500, data_release = 'DR15', image_data = True, image_scale_factor = 0.01, to_file=True):
     """
     Explain what func does and all parameters
 
