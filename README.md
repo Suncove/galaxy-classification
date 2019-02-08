@@ -2,6 +2,7 @@
 Query data from SDSS servers and CNN to classify galaxies as spiral/elliptical
 
 ## Usage
+### Dependancies
 ### Getting the Data
 
 ### Training the Convolutional Neural Net 
