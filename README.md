@@ -17,7 +17,7 @@ Can be created [here](https://skyserver.sdss.org/CasJobs/).
 * Keras
 * SciServer
 
-### Getting the Data:[sdss_query.py](../sdss_query.py)
+### Getting the Data:[sdss_query.py](/sdss_query.py)
 To create **galaxy_data.csv** and **galaxy_images.npy** you must call create_datafiles(). Files will be created in your current directory.
 Example of creating data files with default parameters:
 ```python
@@ -68,7 +68,7 @@ plt.imshow(image_data[0])
 plt.show()
 ```
 
-### [Convolutional Neural Net (CNN)](../GalaxyClassifier.py)
+### [Convolutional Neural Net (CNN)](/GalaxyClassifier.py)
 
 **get_data()** grabs the image and meta data from galaxy_data.csv and galaxy_images.npy and extracts the classifications and images 
 
