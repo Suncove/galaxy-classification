@@ -1,3 +1,22 @@
+#! /usr/bin/env python3
+
+#Copyright 2019 Kyle Steckler
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this
+# software and associated documentation files (the "Software"), to deal in the Software 
+# without restriction, including without limitation the rights to use, copy, modify, merge, 
+# publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons 
+# to whom the Software is furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all copies or 
+# substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
+# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR 
+# PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE 
+# FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, 
+# ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -14,7 +33,6 @@ from keras import backend as K
 from sklearn.metrics import confusion_matrix
 import os
 import pdb
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 def min_max_normalize(x):
     norm_arr = np.array((x - np.min(x)) / (np.max(x) - np.min(x)))
@@ -74,9 +92,8 @@ def create_cnn(input_shape):
 
     return model
 
+
 if __name__ == '__main__':
-    K.clear_session()
-    tf.contrib.keras.backend.clear_session()
     # Load data
     image_data, labels = get_data()
 
@@ -89,21 +106,20 @@ if __name__ == '__main__':
     
     model = create_cnn(X_train[0].shape)
     model.compile(loss="categorical_crossentropy", optimizer='adam', metrics=["accuracy"])
-    history = model.fit(X_train, y_train, batch_size=5, epochs = 5, validation_split=0.2, verbose=1)
-
-    val_loss = history.history['val_loss']
-    loss = history.history['loss']
-
-    acc = history.history['acc']
-    val_acc = history.history['val_acc']
+    performance = model.fit(X_train, y_train, batch_size=5, epochs = 5, validation_split=0.2, verbose=1)
 
     predictions = model.predict(X_test)
     y_pred = [np.argmax(p) for p in predictions]
     y_true = [np.argmax(x) for x in y_test]
     conf_mat = confusion_matrix(y_true, y_pred)
+    print(conf_mat)
 
-    pdb.set_trace()
-    
+
+    val_loss = performance.history['val_loss']
+    loss = performance.history['loss']
+
+    acc = performance.history['acc']
+    val_acc = performance.history['val_acc']    
     
 
     plt.plot(val_loss, label = 'val_loss')
@@ -115,9 +131,10 @@ if __name__ == '__main__':
     plt.plot(acc, label='training acc')
     plt.legend()
     plt.show()
+
+    model.save('my-galaxy-model.h5')
     
-    
-    pdb.set_trace()
+    K.clear_session()
 
 
     
