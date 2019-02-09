@@ -14,7 +14,6 @@ from keras import backend as K
 from sklearn.metrics import confusion_matrix
 import os
 import pdb
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 def min_max_normalize(x):
     norm_arr = np.array((x - np.min(x)) / (np.max(x) - np.min(x)))
@@ -75,8 +74,6 @@ def create_cnn(input_shape):
     return model
 
 if __name__ == '__main__':
-    K.clear_session()
-    tf.contrib.keras.backend.clear_session()
     # Load data
     image_data, labels = get_data()
 
@@ -87,37 +84,39 @@ if __name__ == '__main__':
     test_size = 0.3
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = test_size, random_state=42)
     
+    # Create/Compile/Fit
     model = create_cnn(X_train[0].shape)
     model.compile(loss="categorical_crossentropy", optimizer='adam', metrics=["accuracy"])
     history = model.fit(X_train, y_train, batch_size=5, epochs = 5, validation_split=0.2, verbose=1)
 
+    # Grab performance specs
     val_loss = history.history['val_loss']
     loss = history.history['loss']
-
     acc = history.history['acc']
     val_acc = history.history['val_acc']
 
+    # predict on X_test, get confusion matrix
     predictions = model.predict(X_test)
     y_pred = [np.argmax(p) for p in predictions]
     y_true = [np.argmax(x) for x in y_test]
     conf_mat = confusion_matrix(y_true, y_pred)
-
-    pdb.set_trace()
+    print(conf_mat)    
     
-    
-
+    # plot loss
     plt.plot(val_loss, label = 'val_loss')
-    plt.plot(loss, label = 'Training loss')
+    plt.plot(loss, label = 'loss')
     plt.legend()
     plt.show()
 
+    # plot accuracy
     plt.plot(val_acc, label='val_acc')
-    plt.plot(acc, label='training acc')
+    plt.plot(acc, label='acc')
     plt.legend()
     plt.show()
     
+    model.save('my-galaxy-model.h5')
+    K.clear_session()
     
-    pdb.set_trace()
 
 
     
