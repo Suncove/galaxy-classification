@@ -92,6 +92,32 @@ def create_cnn(input_shape):
 
     return model
 
+def plot_loss(history):
+    val_loss = history.history['val_loss']
+    loss = history.history['loss']
+
+    acc = history.history['acc']
+    val_acc = history.history['val_acc']    
+    
+    plt.figure()
+    
+    plt.subplot(121)
+    plt.title('Loss')
+    plt.plot(val_loss, label = 'val_loss')
+    plt.plot(loss, label = 'Training loss')
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    plt.legend()
+
+    plt.subplot(122)
+    plt.title('Accuracy')
+    plt.plot(val_acc, label='val_acc')
+    plt.plot(acc, label='training acc')
+    plt.xlabel('Epochs')
+    plt.ylabel('Accuracy')
+    plt.legend()
+
+    plt.show()
 
 if __name__ == '__main__':
     # Load data
@@ -114,23 +140,9 @@ if __name__ == '__main__':
     conf_mat = confusion_matrix(y_true, y_pred)
     print(conf_mat)
 
+    plot_loss(performance)
 
-    val_loss = performance.history['val_loss']
-    loss = performance.history['loss']
 
-    acc = performance.history['acc']
-    val_acc = performance.history['val_acc']    
-    
-
-    plt.plot(val_loss, label = 'val_loss')
-    plt.plot(loss, label = 'Training loss')
-    plt.legend()
-    plt.show()
-
-    plt.plot(val_acc, label='val_acc')
-    plt.plot(acc, label='training acc')
-    plt.legend()
-    plt.show()
 
     model.save('my-galaxy-model.h5')
     
