@@ -26,7 +26,7 @@ from getpass import getpass
 import pdb
 import sys
 
-def create_datafiles(n_galaxies = 150,galaxy_type = 'both', lower_z_limit=0.1, upper_z_limit = 0.3, lower_flux_limit = 50, upper_flux_limit = 500, data_release = 'DR15', image_data = True, image_scale_factor = 0.01, to_file=True):
+def create_datafiles(n_galaxies = 150,galaxy_type = 'both', lower_z_limit=0.1, upper_z_limit = 0.3, lower_flux_limit = 50, upper_flux_limit = 500, data_release = 'DR15', image_data = True, image_scale_factor = 0.01):
     """
     Explain what func does and all parameters
 
@@ -83,14 +83,13 @@ def create_datafiles(n_galaxies = 150,galaxy_type = 'both', lower_z_limit=0.1, u
     if image_data:
         print("Grabbing Image Data ...")
         images = get_image_data(df, scaling_factor = image_scale_factor)
+        np.save('galaxy_images', images)
+        print("File Created: galaxy_images.npy")
 
 
-    if to_file:
-        df.to_csv('galaxy_data.csv', index=False)
-        print("File Created: galaxy_data.csv")
-        if image_data:
-            np.save('galaxy_images', images)
-            print("File Created: galaxy_images.npy")
+    df.to_csv('galaxy_data.csv', index=False)
+    print("File Created: galaxy_data.csv")
+       
 
 
 def get_image_data(results, scaling_factor = 0.01):
