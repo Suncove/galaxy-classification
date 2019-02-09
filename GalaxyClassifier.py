@@ -1,6 +1,10 @@
 #! /usr/bin/env python3
 
+<<<<<<< HEAD
 #Copyright 2019 Kyle Steckler
+=======
+# Copyright 2019 Kyle Steckler
+>>>>>>> 76cf2aac68482463da22774549283b6f763d1fdc
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this
 # software and associated documentation files (the "Software"), to deal in the Software 
@@ -130,14 +134,27 @@ if __name__ == '__main__':
     test_size = 0.3
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = test_size, random_state=42)
     
+    # Create/Compile/Fit
     model = create_cnn(X_train[0].shape)
     model.compile(loss="categorical_crossentropy", optimizer='adam', metrics=["accuracy"])
+<<<<<<< HEAD
     performance = model.fit(X_train, y_train, batch_size=5, epochs = 5, validation_split=0.2, verbose=1)
+=======
+    history = model.fit(X_train, y_train, batch_size=5, epochs = 5, validation_split=0.2, verbose=1)
 
+    # Grab performance specs
+    val_loss = history.history['val_loss']
+    loss = history.history['loss']
+    acc = history.history['acc']
+    val_acc = history.history['val_acc']
+>>>>>>> 76cf2aac68482463da22774549283b6f763d1fdc
+
+    # predict on X_test, get confusion matrix
     predictions = model.predict(X_test)
     y_pred = [np.argmax(p) for p in predictions]
     y_true = [np.argmax(x) for x in y_test]
     conf_mat = confusion_matrix(y_true, y_pred)
+<<<<<<< HEAD
     print(conf_mat)
 
     plot_loss(performance)
@@ -147,6 +164,25 @@ if __name__ == '__main__':
     model.save('my-galaxy-model.h5')
     
     K.clear_session()
+=======
+    print(conf_mat)    
+    
+    # plot loss
+    plt.plot(val_loss, label = 'val_loss')
+    plt.plot(loss, label = 'loss')
+    plt.legend()
+    plt.show()
+
+    # plot accuracy
+    plt.plot(val_acc, label='val_acc')
+    plt.plot(acc, label='acc')
+    plt.legend()
+    plt.show()
+    
+    model.save('my-galaxy-model.h5')
+    K.clear_session()
+    
+>>>>>>> 76cf2aac68482463da22774549283b6f763d1fdc
 
 
     

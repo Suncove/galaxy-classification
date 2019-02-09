@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-#Copyright 2019 Kyle Steckler
+# Copyright 2019 Kyle Steckler
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this
 # software and associated documentation files (the "Software"), to deal in the Software 
@@ -108,6 +108,7 @@ def get_image_data(results, scaling_factor = 0.01):
         data.append(SkyServer.getJpegImgCutout(ra,dec, scale=scale))
         count += 1
 
+    # data.shape = (n_galaxies, h, w, channels)
     return np.array(data)
 
 
