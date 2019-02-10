@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-# Copyright 2019 Kyle Steckler
+#Copyright 2019 Kyle Steckler
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this
 # software and associated documentation files (the "Software"), to deal in the Software 
@@ -26,7 +26,7 @@ from getpass import getpass
 import pdb
 import sys
 
-def create_datafiles(n_galaxies = 150,galaxy_type = 'both', lower_z_limit=0.1, upper_z_limit = 0.3, lower_flux_limit = 50, upper_flux_limit = 500, data_release = 'DR15', image_data = True, image_scale_factor = 0.01):
+def create_datafiles(n_galaxies = 200,galaxy_type = 'both', lower_z_limit=0.1, upper_z_limit = 0.3, lower_flux_limit = 50, upper_flux_limit = 500, data_release = 'DR15', image_data = True, image_scale_factor = 0.01):
     """
     Explain what func does and all parameters
 
@@ -87,8 +87,10 @@ def create_datafiles(n_galaxies = 150,galaxy_type = 'both', lower_z_limit=0.1, u
         print("File Created: galaxy_images.npy")
 
 
-    df.to_csv('galaxy_data.csv', index=False)
-    print("File Created: galaxy_data.csv")
+    #df.to_csv('galaxy_data.csv', index=False)
+    galaxy_labels = np.array(df['Classification'])
+    galaxy_labels.to_csv('galaxy_labels.npy')
+    print("File Created: galaxy_labels.npy.csv")
        
 
 
@@ -108,7 +110,6 @@ def get_image_data(results, scaling_factor = 0.01):
         data.append(SkyServer.getJpegImgCutout(ra,dec, scale=scale))
         count += 1
 
-    # data.shape = (n_galaxies, h, w, channels)
     return np.array(data)
 
 
