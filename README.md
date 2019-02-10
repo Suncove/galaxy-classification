@@ -82,5 +82,5 @@ will run a scipt that calls get_data(), clean_data(), create_cnn(), performs a t
 ```
 Predictions will be made for X_test and a confusion matrix is printed to terminal. Loss and Accuracy plots across the 5 epochs are plotted and shown. Model is saved to your computer as 'my-galaxy-model.h5'.
 
-For a more customizable CNN package look here.
+For a more customizable CNN package look [here](https://github.com/Suncove/CNN-class)
   
