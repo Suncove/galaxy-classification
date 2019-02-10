@@ -90,7 +90,7 @@ def create_datafiles(n_galaxies = 200,galaxy_type = 'both', lower_z_limit=0.1, u
     #df.to_csv('galaxy_data.csv', index=False)
     galaxy_labels = np.array(df['Classification'])
     galaxy_labels.to_csv('galaxy_labels.npy')
-    print("File Created: galaxy_labels.npy.csv")
+    print("File Created: galaxy_labels.npy")
        
 
 
