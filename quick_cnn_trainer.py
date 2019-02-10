@@ -142,7 +142,7 @@ if __name__ == '__main__':
     y_pred = [np.argmax(p) for p in predictions]
     y_true = [np.argmax(x) for x in y_test]
     conf_mat = confusion_matrix(y_true, y_pred)
-    print(conf_mat)        
+    print(conf_mat)
     print(f"Confusion Matrix:\n{confusion_matrix(y_true, y_pred)}\n\n")
     print(f"Overall Accuracy:  {accuracy_score(y_true,y_pred)}")
     print(f"Balanced Accuracy: {balanced_accuracy_score(y_true,y_pred)}")
