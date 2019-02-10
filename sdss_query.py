@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-#Copyright 2019 Kyle Steckler
+# Copyright 2019 Kyle Steckler
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this
 # software and associated documentation files (the "Software"), to deal in the Software 
@@ -28,7 +28,8 @@ import sys
 
 def create_datafiles(n_galaxies = 200,galaxy_type = 'both', lower_z_limit=0.1, upper_z_limit = 0.3, lower_flux_limit = 50, upper_flux_limit = 500, data_release = 'DR15', image_data = True, image_scale_factor = 0.01):
     """
-    Explain what func does and all parameters
+    Function to Query SDSS Database and grab labeled image data of galaxies within given constraints. 
+    Creates 2 files: galaxy_images.npy & galaxy_labels.npy
 
     """
     auth_login = input("Username: ")
@@ -86,13 +87,10 @@ def create_datafiles(n_galaxies = 200,galaxy_type = 'both', lower_z_limit=0.1, u
         np.save('galaxy_images', images)
         print("File Created: galaxy_images.npy")
 
-
-    #df.to_csv('galaxy_data.csv', index=False)
     galaxy_labels = np.array(df['Classification'])
-    galaxy_labels.to_csv('galaxy_labels.npy')
+    np.save('galaxy_labels.npy', galaxy_labels)
     print("File Created: galaxy_labels.npy")
        
-
 
 def get_image_data(results, scaling_factor = 0.01):
     # RA, DEC, RADIUS OF 90% FLUX 
