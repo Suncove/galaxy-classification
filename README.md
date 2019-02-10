@@ -47,15 +47,8 @@ Image data is accessed via SkyServer.getJpegImgCutout(). Full documentation on t
 The SDSS database has hundreds of tables, views, and variables not included in the create_datafiles function. You can create more complex queries by changing the SQL_Query variable (lines 51-65) to the specifics that you need. Full documentation and schema browser for the SDSS database can be accessed [here](https://skyserver.sdss.org/CasJobs/SchemaBrowser.aspx)
 
 ### Data Files
-**galaxy_data.csv**  
-   Table with n_galaxies rows, 9 columns. RA, DEC, petroR90 are required to get image data. 'lnLDeV_g' is the log probability of a De Vaucouleurs' fit. df['Classification'] = 0 for spiral, 1 for ellipticals. _not 100% accurate_. 
-```python
-import pandas as pd
-df = pd.read_csv('galaxy_data.csv')
-df.columns
-```
->> Index(['#objid', 'ra', 'dec', 'petroR90_g', 'petroFlux_g', 'specObjID', 'lnLDeV_g', 'z', 'Classification'],
-      dtype='object')
+**galaxy_labels.npy**  
+   NumPy array of labels classifying the galaxies. 0: likely spiral, 1: likely elliptical
       
 **galaxy_images.npy**  
    NumPy array of n_galaxies images with RGB color channels. array.shape = (n_galaxies, 512, 512, 3). It is straightforward to view an individual galaxy image.
@@ -68,9 +61,9 @@ plt.imshow(image_data[0])
 plt.show()
 ```
 
-### [Convolutional Neural Net (CNN)](/GalaxyClassifier.py)
+### [Quick CNN](/quick_cnn_trainer.py)
 
-**get_data()** grabs the image and meta data from galaxy_data.csv and galaxy_images.npy and extracts the classifications and images 
+**get_data()** grabs the image and labels from galaxy_images.npy, galaxy_labels.npy 
 
 **clean_data()** one-hot encodes the galaxy classifications and normalizes the images
 
@@ -78,14 +71,14 @@ plt.show()
   [Conv2d->BatchNormalization->MaxPooling->Dropout->FullyConnected]
   If you have a powerful computer with enough RAM you can create a deeper network by uncommenting lines of additional conv2D/pooling layers. 
   
-Currently this module is set only to run as a script with default parameters. The terminal command:
+This module is meant to be a script to get a quick and dirty galaxy classification model trained. The terminal command:
 ```python
 python GalaxyClassifier.py
 ```
 will run a scipt that calls get_data(), clean_data(), create_cnn(), performs a train/test split (test_size=0.3) and compile/fits the model with:
 ```python
     model.compile(loss="categorical_crossentropy", optimizer='adam', metrics=["accuracy"])
-    performance = model.fit(X_train, y_train, batch_size=5, epochs = 5, validation_split=0.2, verbose=1)
+    performance = model.fit(X_train, y_train, batch_size=5, epochs = 15, validation_split=0.2, verbose=1)
 ```
 Predictions will be made for X_test and a confusion matrix is printed to terminal. Loss and Accuracy plots across the 5 epochs are plotted and shown. Model is saved to your computer as 'my-galaxy-model.h5'.
   
