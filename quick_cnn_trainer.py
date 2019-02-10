@@ -32,6 +32,8 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 from keras import backend as K
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import f1_score, precision_score, accuracy_score, balanced_accuracy_score, recall_score 
+
 import os
 import pdb
 
@@ -140,7 +142,14 @@ if __name__ == '__main__':
     y_pred = [np.argmax(p) for p in predictions]
     y_true = [np.argmax(x) for x in y_test]
     conf_mat = confusion_matrix(y_true, y_pred)
-    print(conf_mat)
+    print(conf_mat)        
+    print(f"Confusion Matrix:\n{confusion_matrix(y_true, y_pred)}\n\n")
+    print(f"Overall Accuracy:  {accuracy_score(y_true,y_pred)}")
+    print(f"Balanced Accuracy: {balanced_accuracy_score(y_true,y_pred)}")
+    print(f"F1 Score:          {f1_score(y_true,y_pred)}")
+    print(f"Precision Score:   {precision_score(y_true, y_pred)}")
+    print(f"Recall Score: {recall_score(y_true, y_pred)}\n\n")
+        
 
     plot_loss(performance)
     model.save('my-galaxy-model.h5')
