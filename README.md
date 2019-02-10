@@ -61,7 +61,7 @@ plt.imshow(image_data[0])
 plt.show()
 ```
 
-### [Quick CNN](/quick_cnn_trainer.py)
+### Quick CNN[quick_cnn_trainer.py](/quick_cnn_trainer.py)
 
 **get_data()** grabs the image and labels from galaxy_images.npy, galaxy_labels.npy 
 
@@ -73,7 +73,7 @@ plt.show()
   
 This module is meant to be a script to get a quick and dirty galaxy classification model trained. The terminal command:
 ```python
-python GalaxyClassifier.py
+python quick_cnn_trainer.py
 ```
 will run a scipt that calls get_data(), clean_data(), create_cnn(), performs a train/test split (test_size=0.3) and compile/fits the model with:
 ```python
