@@ -59,10 +59,9 @@ def clean_data(images, labels):
 
     return normalized_images, encoded_labels
 
-def get_data(image_data = 'galaxy_images.npy', galaxy_data = 'galaxy_data.csv', target='Classification'):
+def get_data(image_data = 'galaxy_images.npy', galaxy_data = 'galaxy_labels.npy'):
     image_data = np.load(image_data)
-    galaxy_data = pd.read_csv(galaxy_data)
-    labels = np.array(galaxy_data[target])
+    labels = np.load(galaxy_data)
     return image_data, labels
 
 def create_cnn(input_shape):
