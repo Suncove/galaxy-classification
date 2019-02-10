@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-#Copyright 2019 Kyle Steckler
+# Copyright 2019 Kyle Steckler
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this
 # software and associated documentation files (the "Software"), to deal in the Software 
@@ -17,6 +17,7 @@
 # FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, 
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+# QUICK/EASY SCRIPT TO DEVELOP A VERY BASIC CNN TO CLASSIFY GALAXIEs
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -67,21 +68,21 @@ def get_data(image_data = 'galaxy_images.npy', galaxy_data = 'galaxy_data.csv', 
 def create_cnn(input_shape):
     model = Sequential()
     
-    model.add(Conv2D(16, kernel_size=(2,2), padding = 'same',input_shape = input_shape, activation ="relu"))
+    model.add(Conv2D(16, kernel_size=(3,3), padding = 'same',input_shape = input_shape, activation ="relu"))
     model.add(BatchNormalization(axis=-1))
-    model.add(MaxPooling2D(pool_size = (2,2)))
+    model.add(MaxPooling2D(pool_size = (3,3)))
     model.add(Dropout(0.25))
 
     ## REUQIRES > 16GB RAM
-    # model.add(Conv2D(32, (2, 2), padding='same', activation="relu"))
+    # model.add(Conv2D(32, (3, 3), padding='same', activation="relu"))
     # model.add(BatchNormalization(axis=-1))
-    # model.add(MaxPooling2D(pool_size = (2,2)))
+    # model.add(MaxPooling2D(pool_size = (3,3)))
     # model.add(Dropout(0.25))
 
     # REQUIRES > 32GB RAM
-    # model.add(Conv2D(64, (2, 2), padding='same', activation="relu"))
+    # model.add(Conv2D(64, (3, 3), padding='same', activation="relu"))
     # model.add(BatchNormalization(axis=-1))
-    # model.add(MaxPooling2D(pool_size = (2,2)))
+    # model.add(MaxPooling2D(pool_size = (3,3)))
     # model.add(Dropout(0.25))  \
       
     model.add(Flatten())
