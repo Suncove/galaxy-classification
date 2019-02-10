@@ -143,9 +143,6 @@ if __name__ == '__main__':
     print(conf_mat)
 
     plot_loss(performance)
-
-
-
     model.save('my-galaxy-model.h5')
     
     K.clear_session()
