@@ -61,7 +61,7 @@ plt.imshow(image_data[0])
 plt.show()
 ```
 
-### Quick CNN[quick_cnn_trainer.py](/quick_cnn_trainer.py)
+### Quick CNN [quick_cnn_trainer.py](/quick_cnn_trainer.py)
 
 **get_data()** grabs the image and labels from galaxy_images.npy, galaxy_labels.npy 
 
@@ -81,4 +81,6 @@ will run a scipt that calls get_data(), clean_data(), create_cnn(), performs a t
     performance = model.fit(X_train, y_train, batch_size=5, epochs = 15, validation_split=0.2, verbose=1)
 ```
 Predictions will be made for X_test and a confusion matrix is printed to terminal. Loss and Accuracy plots across the 5 epochs are plotted and shown. Model is saved to your computer as 'my-galaxy-model.h5'.
+
+For a more customizable CNN package look here.
   
