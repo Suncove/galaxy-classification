@@ -61,7 +61,7 @@ def create_datafiles(n_galaxies = 200,galaxy_type = 'both', lower_z_limit=0.1, u
         SQL_Query += "AND (g.lnLDeV_r > g.lnLExp_r + 0.1 AND g.lnLExp_r > -999.0 AND g.lnLDeV_g > -999.0) "
         SQL_Query += "OR (g.lnLDeV_g < -2000.0 AND g.lnLDeV_g + 0.1 < g.lnLExp_g );"
     elif galaxy_type == 'spiral':
-        SQL_Query += "AND (g.lnLDeV_g < -1000.0 AND g.lnLDeV_g < g.lnLExp_g); "
+        SQL_Query += "AND (g.lnLDeV_g < -1500.0 AND g.lnLDeV_g < g.lnLExp_g); "
     elif galaxy_type == 'elliptical':
         SQL_Query += "AND g.lnLDeV_r > g.lnLExp_r + 0.1 AND g.lnLExp_r > -999.0 AND g.lnLDeV_g > -999.0;"
     else:
@@ -105,7 +105,7 @@ def get_image_data(results, scaling_factor = 0.01):
     count = 0
     for ra,dec,scale in zip(RA, DEC, scaler):
         print(f"{count}/{len(RA)} Images Done" )
-        data.append(SkyServer.getJpegImgCutout(ra,dec, scale=scale))
+        data.append(SkyServer.getJpegImgCutout(ra,dec, scale=scale, width=256, height=256))
         count += 1
 
     return np.array(data)
