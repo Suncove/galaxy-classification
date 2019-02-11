@@ -26,7 +26,8 @@ from getpass import getpass
 import pdb
 import sys
 
-def create_datafiles(n_galaxies = 200,galaxy_type = 'both', lower_z_limit=0.1, upper_z_limit = 0.3, lower_flux_limit = 50, upper_flux_limit = 500, data_release = 'DR15', image_data = True, image_scale_factor = 0.01):
+def create_datafiles(n_galaxies = 200,galaxy_type = 'both', lower_z_limit=0.1, upper_z_limit = 0.3, lower_flux_limit = 50, 
+                     upper_flux_limit = 500, data_release = 'DR15', image_data = True, image_scale_factor = 0.01):
     """
     Function to Query SDSS Database and grab labeled image data of galaxies within given constraints. 
     Creates 2 files: galaxy_images.npy & galaxy_labels.npy
