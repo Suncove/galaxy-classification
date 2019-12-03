@@ -12,7 +12,9 @@ Can be created [here](https://skyserver.sdss.org/CasJobs/).
   * Increasing kernel size and/or stride in convolution layer
 
 ### Dependencies
-* Typical Python packages (numpy, pandas, scikit, etc.)
+* NumPy
+* Pandas
+* Scikit
 * Tensorflow
 * Keras
 * SciServer
