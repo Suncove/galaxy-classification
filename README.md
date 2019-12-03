@@ -80,7 +80,4 @@ will run a scipt that calls get_data(), clean_data(), create_cnn(), performs a t
     model.compile(loss="categorical_crossentropy", optimizer='adam', metrics=["accuracy"])
     performance = model.fit(X_train, y_train, batch_size=5, epochs = 15, validation_split=0.2, verbose=1)
 ```
-Predictions will be made for X_test and a confusion matrix is printed to terminal. Loss and Accuracy plots across the 15 epochs are plotted and shown. Model is saved to your computer as 'my-galaxy-model.h5'.
-
-For a more customizable CNN package look [here](https://github.com/Suncove/CNN-class)
-  
+Predictions will be made for X_test and a confusion matrix is printed to terminal. Loss and Accuracy plots across the 15 epochs are plotted and shown. Model is saved to your computer as 'my-galaxy-model.h5'.  
