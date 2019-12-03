@@ -21,15 +21,10 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import keras
+import tensorflow as tf 
 from sklearn.model_selection import train_test_split
 from keras.utils import to_categorical
-from keras.models import Sequential
-from keras.layers import Conv2D, MaxPooling2D
-from keras.layers.core import Dense, Dropout, Flatten
-from keras.layers import BatchNormalization
 import matplotlib.pyplot as plt
-import tensorflow as tf
 from keras import backend as K
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import f1_score, precision_score, accuracy_score, balanced_accuracy_score, recall_score 
@@ -67,30 +62,18 @@ def get_data(image_data = 'galaxy_images.npy', galaxy_data = 'galaxy_labels.npy'
     return image_data, labels
 
 def create_cnn(input_shape):
-    model = Sequential()
+    model = tf.keras.Sequential()
     
-    model.add(Conv2D(16, kernel_size=(3,3), padding = 'same',input_shape = input_shape, activation ="relu"))
-    model.add(BatchNormalization(axis=-1))
-    model.add(MaxPooling2D(pool_size = (3,3)))
-    model.add(Dropout(0.25))
-
-    ## REUQIRES > 16GB RAM
-    # model.add(Conv2D(32, (3, 3), padding='same', activation="relu"))
-    # model.add(BatchNormalization(axis=-1))
-    # model.add(MaxPooling2D(pool_size = (3,3)))
-    # model.add(Dropout(0.25))
-
-    # REQUIRES > 32GB RAM
-    # model.add(Conv2D(64, (3, 3), padding='same', activation="relu"))
-    # model.add(BatchNormalization(axis=-1))
-    # model.add(MaxPooling2D(pool_size = (3,3)))
-    # model.add(Dropout(0.25))  \
+    model.add(tf.keras.layers.Conv2D(16, kernel_size=(3,3), padding = 'same',input_shape = input_shape, activation ="relu"))
+    model.add(tf.keras.layers.BatchNormalization(axis=-1))
+    model.add(tf.keras.layers.MaxPooling2D(pool_size = (3,3)))
+    model.add(tf.kerasl.layers.Dropout(0.25))
       
-    model.add(Flatten())
-    model.add(Dense(64, activation="relu"))
-    model.add(BatchNormalization())
-    model.add(Dropout(0.25))
-    model.add(Dense(2, activation="softmax"))
+    model.add(tf.keras.layers.Flatten())
+    model.add(tf.keras.layers.Dense(64, activation="relu"))
+    model.add(tf.keras.layers.BatchNormalization())
+    model.add(tf.keras.layers.Dropout(0.25))
+    model.add(tf.keras.layers.Dense(2, activation="sigmoid"))
 
     return model
 
@@ -152,7 +135,7 @@ if __name__ == '__main__':
         
 
     plot_loss(performance)
-    model.save('my-galaxy-model.h5')
+    model.save('my-galaxy-model')
     
     K.clear_session()
 
